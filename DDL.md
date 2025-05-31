@@ -3,51 +3,65 @@
 
 ```sql
 
-CREATE TABLE farmacia(
-    CNPJ SERIAL PRIMARY KEY,
-    nome_fantasia VARCHAR(100) NOT NULL,
-    razao_social VARCHAR(100) NOT NULL,
-    telefone VARCHAR(14) UNIQUE NOT NULL,
-    
-);
-CREATE TABLE colaboradores (
+CREATE TABLE colaborador (
     id_colaborador SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     cargo VARCHAR(50) NOT NULL,
     rg VARCHAR(14) UNIQUE NOT NULL,
     data_nascimento DATE NOT NULL
-
 );
 
 CREATE TABLE cliente (
     id_cliente SERIAL PRIMARY KEY,
-    nome cliente VARCHAR(100) NOT NULL,
-    rg VARCHAR(100) NOT NULL,
+    nome_cliente VARCHAR(50) NOT NULL,
+    rg VARCHAR(14) UNIQUE NOT NULL,
     data_nascimento DATE NOT NULL
+);
 
+CREATE TABLE produto (
+    id_produto SERIAL PRIMARY KEY,
+    nome_produto VARCHAR(50) NOT NULL,
+    qtd_produto INT NOT NULL,
+    valor_produto DECIMAL(6, 2) NOT NULL
+);
+
+CREATE TABLE farmacia(
+    id_farmacia SERIAL PRIMARY KEY,
+    cnpj VARCHAR(14) UNIQUE NOT NULL,
+    nome_fantasia VARCHAR(50) NOT NULL,
+    razao_social VARCHAR(50) NOT NULL,
+    telefone VARCHAR(14) UNIQUE NOT NULL,
+    id_colaborador INTEGER NOT NULL REFERENCES colaborador(id_colaborador)
 );
 
 CREATE TABLE endereco (
-   
     id_endereco SERIAL PRIMARY KEY,
-    logradouro VARCHAR(100) NOT NULL,
+    logradouro VARCHAR(50) NOT NULL,
     numero VARCHAR(10) NOT NULL,
     complemento VARCHAR(100),
-    bairro VARCHAR(100),
-    cidade VARCHAR(100) NOT NULL,
+    bairro VARCHAR(50),
+    cidade VARCHAR(50) NOT NULL,
     estado VARCHAR(2) NOT NULL,
     cep VARCHAR(9) NOT NULL,
-    tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('Comercial','Residencial')) DEFAULT 'Residencial'
-    
+    tipo VARCHAR(20) NOT NULL DEFAULT 'Residencial' -- caso nenhum for inserido o campo será preenchido com residecial
+        CHECK (tipo IN ('Comercial','Residencial')),  -- aceita apenas dois tipos "Comercial" e "Residencial" 
+    id_cliente INTEGER REFERENCES cliente(id_cliente),
+    id_farmacia INTEGER REFERENCES farmacia(id_farmacia),
+    CHECK (
+        (id_cliente IS NOT NULL AND id_farmacia IS NULL) OR
+        (id_cliente IS NULL AND id_farmacia IS NOT NULL))
 );
 
-CREATE TABLE produtos (
-    id_produto SERIAL PRIMARY KEY,
-    nome_produto VARCHAR(100) NOT NULL,
-    qtd_produto INT (100) NOT NULL,
-    valor_produto DECIMAL(6, 2) NOT NULL,
+CREATE TABLE farmacia_produto (
+    id_farmacia INTEGER NOT NULL REFERENCES farmacia(id_farmacia),
+    id_produto INTEGER NOT NULL REFERENCES produto(id_produto),
+    PRIMARY KEY (id_farmacia, id_produto)
+);
 
-
+CREATE TABLE farmacia_cliente (
+    id_farmacia INTEGER NOT NULL REFERENCES farmacia(id_farmacia),
+    id_cliente INTEGER NOT NULL REFERENCES cliente(id_cliente)
+    PRIMARY KEY (id_farmacia, id_cliente)
 );
 
 ```
