@@ -1,14 +1,15 @@
-````sql
+```sql
 
 INSERT INTO colaborador (nome, cargo, rg, data_nascimento) VALUES
-('Ana Paula Souza', 'Atendente', '12.345.678-9', '1995-08-15'),
-('Carlos Eduardo Lima', 'Farmacêutico', '98.765.432-1', '1988-03-22');
+('Ana Paula Souza', 'Atendente', '123456789', '1995-08-15'),
+('Carlos Eduardo Lima', 'Farmacêutico', '987654321', '1988-03-22'),
+('Elenn Queiroz da Silva', 'Administrador', '456789123', '1989-12-09');
 
 INSERT INTO cliente (nome_cliente, rg, data_nascimento) VALUES
-('Fernanda Oliveira', '11.223.344-5', '2000-12-05'),
-('João Pedro Ramos', '55.667.788-9', '1992-06-10'),
-('Bruno Silva', '44.556.778-9', '1995-01-30'),
-('Juliana Rocha', '66.778.899-0', '2001-07-12');
+('Fernanda Oliveira', '112233445', '2000-12-05'),
+('João Pedro Ramos', '556677889', '1992-06-10'),
+('Bruno Silva', '445567789', '1995-01-30'),
+('Juliana Rocha', '667788990', '2001-07-12');
 
 INSERT INTO produto (nome_produto, qtd_produto, valor_produto) VALUES
 ('Paracetamol 500mg', 200, 4.50),
@@ -17,8 +18,8 @@ INSERT INTO produto (nome_produto, qtd_produto, valor_produto) VALUES
 ('Shampoo Pantene', 60, 25.60);
 
 INSERT INTO farmacia (cnpj, id_colaborador, nome_fantasia, razao_social, telefone) VALUES
-('17.514.572/0001-91', 1, 'Farma+', 'Farma Mais Comércio de Produtos Farmacêuticos Ltda', '(11)98765-4321'),
-('12.345.678/0001-00', 2, 'Saúde Já', 'Saúde Já Distribuidora de Medicamentos Ltda', '(21)99876-5432');
+('17514572000191', 1, 'Farma+', 'Farma Mais Comércio de Produtos Farmacêuticos Ltda', '(11)98765-4321'),
+('12345678000100', 2, 'Saúde Já', 'Saúde Já Distribuidora de Medicamentos Ltda', '(21)99876-5432');
 
 INSERT INTO endereco (id_cliente, id_farmacia, logradouro, numero, complemento, bairro, cidade, estado, cep, tipo) VALUES
 (1, NULL, 'Rua das Flores', '123', 'Apto 101', 'Centro', 'São Paulo', 'SP', '01001-000', 'Residencial'),
@@ -41,5 +42,6 @@ INSERT INTO farmacia_cliente (id_farmacia, id_cliente) VALUES
 (1, 2),
 (2, 3),
 (2, 4);
+
 
 ```
