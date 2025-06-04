@@ -1,4 +1,3 @@
-
 Farma Mais 💊
 
 Sobre o projeto 📌
@@ -38,18 +37,6 @@ O banco foi modelado até a 3ª Forma Normal (3FN) para garantir:
     Controle de acesso - DCL
 
     Gerenciação de transações - DTL
-
-✅ Conclusão
-
-O projeto Toyota Experience representa um marco na transformação digital da relação cliente–marca no setor automotivo. A equipe aplicou com sucesso conhecimentos em:
-
-    Programação Web
-
-    Modelagem de Dados Relacional
-
-    Design de Interfaces
-
-    Trabalho Colaborativo
 
 👥 Equipe
 
