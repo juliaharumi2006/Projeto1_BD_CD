@@ -1,4 +1,5 @@
 ```sql
+
 -- Criando usuários
 CREATE USER administrador WITH PASSWORD 'admin123';
 CREATE USER farmaceutico WITH PASSWORD 'farm123';

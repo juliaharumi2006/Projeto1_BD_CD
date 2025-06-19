@@ -8,14 +8,16 @@ CREATE TABLE colaborador (
     nome VARCHAR(100) NOT NULL,
     cargo VARCHAR(50) NOT NULL,
     rg VARCHAR(14) UNIQUE NOT NULL,
-    data_nascimento DATE NOT NULL
+    data_nascimento DATE NOT NULL, 
+    id_farmacia INTEGER NOT NULL REFERENCES farmacia(id_farmacia)
 );
 
 CREATE TABLE cliente (
     id_cliente SERIAL PRIMARY KEY,
     nome_cliente VARCHAR(50) NOT NULL,
     rg VARCHAR(14) UNIQUE NOT NULL,
-    data_nascimento DATE NOT NULL
+    data_nascimento DATE NOT NULL,
+    id_endereco INTEGER REFERENCES endereco(id_endereco)
 );
 
 CREATE TABLE produto (
@@ -31,7 +33,6 @@ CREATE TABLE farmacia(
     nome_fantasia VARCHAR(50) NOT NULL,
     razao_social VARCHAR(50) NOT NULL,
     telefone VARCHAR(14) UNIQUE NOT NULL,
-    id_colaborador INTEGER NOT NULL REFERENCES colaborador(id_colaborador)
 );
 
 CREATE TABLE endereco (
@@ -43,9 +44,10 @@ CREATE TABLE endereco (
     cidade VARCHAR(50) NOT NULL,
     estado VARCHAR(2) NOT NULL,
     cep VARCHAR(9) NOT NULL,
-    tipo VARCHAR(20) NOT NULL DEFAULT 'Residencial' -- caso nenhum for inserido o campo será preenchido com residecial
-        CHECK (tipo IN ('Comercial','Residencial')),  -- aceita apenas dois tipos "Comercial" e "Residencial" 
-    id_cliente INTEGER REFERENCES cliente(id_cliente),
+    -- caso nenhum for inserido o campo será preenchido com residecial
+    tipo VARCHAR(20) NOT NULL DEFAULT 'Residencial' 
+    -- aceita apenas dois tipos "Comercial" e "Residencial" 
+        CHECK (tipo IN ('Comercial','Residencial')),  
     id_farmacia INTEGER REFERENCES farmacia(id_farmacia),
     CHECK (
         (id_cliente IS NOT NULL AND id_farmacia IS NULL) OR

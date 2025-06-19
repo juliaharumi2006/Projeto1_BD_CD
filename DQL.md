@@ -1,6 +1,7 @@
 #DQL
 
 ```sql
+
 SELECT nome_cliente FROM cliente 
 WHERE id_cliente='2';
 
